@@ -84,6 +84,12 @@
 - IN
 - OUT
 
+## MIXAL pseudo-operation
+- EQU
+- ORIG
+- END
+- *+3 (self plus three)
+
 ## conversion operators
 - NUM
 - CHAR
