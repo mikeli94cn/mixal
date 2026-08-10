@@ -27,3 +27,22 @@ MIXAL programming
   * STi
   * STJ
   * STZ
+
+* assigning value operators
+  * ENTA
+  * ENTX
+  * ENTJ
+  * ENTi
+  * INCA
+  * INCX
+  * INCJ
+  * INCi
+  * DECA
+  * DECX
+  * DECJ
+  * DECi
+    
+* comparison operators
+  * CMPA
+  * CMPX
+  * CMPi
