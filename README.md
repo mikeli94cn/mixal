@@ -28,6 +28,12 @@
 - STJ
 - STZ
 
+## arithmetic operators
+- ADD
+- SUB
+- MUL
+- DIV
+
 ## assigning value operators
 - ENTA
 - ENTX
