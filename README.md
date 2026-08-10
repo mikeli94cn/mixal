@@ -1,6 +1,6 @@
-MIXAL programming
-* MIX structure
-  * registers
+# MIXAL programming
+## MIX structure
+  ### registers
     * rA
     * rX
     * rJ
@@ -12,23 +12,23 @@ MIXAL programming
     * rI6
     * CMP
     * OVERFLOW
-  * i/o
-  * memory
+  ### i/o
+  ### memory
     * 4000 CELLS
 
-* loading instruction operators
+## loading instruction operators
   * LDA
   * LDX
   * LDi
 
-* storing instruction operators
+## storing instruction operators
   * STA
   * STX
   * STi
   * STJ
   * STZ
 
-* assigning value operators
+## assigning value operators
   * ENTA
   * ENTX
   * ENTJ
@@ -42,7 +42,7 @@ MIXAL programming
   * DECJ
   * DECi
     
-* comparison operators
+## comparison operators
   * CMPA
   * CMPX
   * CMPi
