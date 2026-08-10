@@ -10,8 +10,8 @@
 - rI4
 - rI5
 - rI6
-- CMP
-- OVERFLOW
+- cmp
+- overflow
 ### i/o
 - magnetic tape (number : 0 ~ 7)
 - disks and drums (number : 8 ~ 15)
