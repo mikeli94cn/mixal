@@ -1,4 +1,21 @@
 MIXAL programming
+* MIX structure
+  * registers
+    * rA
+    * rX
+    * rJ
+    * rI1
+    * rI2
+    * rI3
+    * rI4
+    * rI5
+    * rI6
+    * CMP
+    * OVERFLOW
+  * i/o
+  * memory
+    * 4000 CELLS
+
 * loading instruction operators
   * LDA
   * LDX
