@@ -13,8 +13,14 @@
 - CMP
 - OVERFLOW
 ### i/o
+- magnetic tape (number : 0 ~ 7)
+- disks and drums (number : 8 ~ 15)
+- card reader (number : 16)
+- card punch (number : 17)
+- line printer (number : 18)
+- paper tape (number : 19)
 ### memory
-- 4000 CELLS
+- 4000 CELLS (number : 0 ~ 3999)
 
 ## loading instruction operators
 - LDA
