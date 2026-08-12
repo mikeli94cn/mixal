@@ -1,0 +1,16 @@
+* define a 5-element array with data: 10, 20, 30, 40, 50
+      ORIG 1000
+START ENT1 0
+LOOP  LDA ARR,1
+      INC1 1
+      CMP1 SIZE
+      JL LOOP
+      HLT 
+
+ARR   CON 10      first element (index 0)
+      CON 20      second element (index 1)
+      CON 30      third element (index 2)
+      CON 40      fourth element (index 3)
+      CON 50      five element (index 4)
+SIZE  EQU 5       keep track of the total count
+      END START
