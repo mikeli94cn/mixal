@@ -12,5 +12,5 @@ ARR   CON 10      first element (index 0)
       CON 30      third element (index 2)
       CON 40      fourth element (index 3)
       CON 50      five element (index 4)
-SIZE  EQU 5       keep track of the total count
+SIZE  CON 5       keep track of the total count
       END START
