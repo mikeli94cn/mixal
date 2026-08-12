@@ -1,9 +1,11 @@
       ORIG 3000
 START LD1 TEN
-LOOP  INC1 3
-      J1P LOOP
+LOOP  DEC1 1
+    
 
       ST1 RES
+      JGE 2 LOOP
+
       HLT
 
 TEN CON 10
