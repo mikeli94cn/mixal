@@ -5,10 +5,10 @@ You define an array in MIXAL using the EQU or ORIG pseudo-operations to set asid
 
 * Use ORIG to move the location counter.
 * This leaves empty words for your array data.
-
+``` mixal
 SIZE     EQU   100          Define the array size (100 elements)
 ARRAY    ORIG  *+SIZE       Reserve 100 words of memory
-
+```
 ## 2. How to Visit Array Elements
 To visit elements, you load the element's position into an Index Register (like rI1).
 
@@ -22,14 +22,14 @@ This method starts at index 0 and counts up to the size of the array. [2, 3]
 * Access the item: Use the register next to the array name.
 * Step forward: Increase the index register by 1.
 * Check the end: Compare the index to your maximum size.
-
+``` mixal
          ENT1  0            Set Index Register 1 (rI1) = 0
 LOOP     LDA   ARRAY,1      Load value at (ARRAY + rI1) into rAX
 *                           [Your code to process the element goes here]
          INC1  1            Increment rI1 by 1 (move to next element)
          CMP1  SIZE         Compare rI1 to the array size
          JL    LOOP         If rI1 < SIZE, jump back to LOOP
-
+```
 ## Option B: Walking Backward (Last to First)
 This method is often faster and uses fewer lines of code in MIXAL because you can compare directly against zero.
 
@@ -37,13 +37,13 @@ This method is often faster and uses fewer lines of code in MIXAL because you ca
 * Access the item: Use a negative offset or count down.
 * Step backward: Decrease the index register by 1.
 * Check the end: Loop until the register hits 0.
-
+``` mixal
          ENT1  SIZE         Set rI1 = 100 (start at the end)
 LOOP     LDA   ARRAY-1,1    Load value at (ARRAY - 1 + rI1) into rAX
 *                           [Your code to process the element goes here]
          DEC1  1            Decrement rI1 by 1
          J1P   LOOP         If rI1 > 0, jump back to LOOP
-
+```
 ------------------------------
 If you want to practice writing this code, let me know:
 
@@ -56,7 +56,7 @@ I can provide the exact code block for your specific goal.
 [2] [https://developer.electricimp.com](https://developer.electricimp.com/squirrel/array/insert)
 [3] [https://www.vaia.com](https://www.vaia.com/en-us/textbooks/computer-science/starting-out-with-c-from-control-structures-through-objects-6-edition/chapter-7/problem-54-t-f-to-calculate-the-amount-of-memory-used-by-an-/)
 
-
+---
 
 
 
@@ -66,7 +66,7 @@ To set specific data in your array when you define it, you use the CON (Constant
 Here is how to define an array with pre-set data and how to visit its elements. [1] 
 ## 1. How to Define an Array with Data
 You list your numbers one after the other using the CON command. Each CON takes up exactly one word of memory.
-
+``` mixal
 * Define a 5-element array with data: 10, 20, 30, 40, 50
 ARRAY    CON   10           First element (Index 0)
          CON   20           Second element (Index 1)
@@ -74,11 +74,11 @@ ARRAY    CON   10           First element (Index 0)
          CON   40           Fourth element (Index 3)
          CON   50           Fifth element (Index 4)
 SIZE     EQU   5            Keep track of the total count
-
+```
 ## 2. How to Visit the Elements
 Visiting this array works exactly the same way as an empty one. You use an Index Register to step through the memory locations.
 Here is a complete, runnable example that loops through the data we just defined and adds all the numbers together. [2] 
-
+``` mixal
 * Initialize registers
          ENT1  0            Set Index Register 1 (rI1) = 0
          ENTA  0            Clear Accumulator (rA) = 0 (this holds our sum)
@@ -91,7 +91,7 @@ LOOP     ADD   ARRAY,1      Add the element at (ARRAY + rI1) to rA
 
 * After the loop finishes, rA contains the total sum (150)
          HLT                Stop the MIX machine
-
+```
 ------------------------------
 Now that your data is set up, let me know:
 
