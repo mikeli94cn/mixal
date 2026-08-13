@@ -10,6 +10,7 @@
 - rI4
 - rI5
 - rI6
+### flags
 - cmp
 - overflow
 ### i/o
