@@ -22,6 +22,15 @@
 - paper tape (number : 19)
 ### memory
 - 4000 CELLS (number : 0 ~ 3999)
+- word : 1 sign + 5 bytes
+- one cell can store
+
+|sign|1|2|3|4|5|
+|---|---|---|---|---|---|
+|+/-|byte|byte|byte|byte|byte|
+|+/-|6 bits|6 bits|6 bits|6 bits|6 bits|
+|+/-|111111|111111|111111|111111|111111|
+|+/-|63|63|63|63|63|
 
 ## MIX computer character set
 |line\column|1|2|3|4|5|6|7|8|
