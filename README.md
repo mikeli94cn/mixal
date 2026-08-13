@@ -44,6 +44,7 @@
 |7|48 =|49 $|50 <|51 >|52 |53 ;|54 : |55 '|
 |8|56 |57 |58 |59 |60 |61 |62 |63 |
 ## MIX computer instruction set
+### control the amount of instrution operator, keep common used, reduce spare, extra, useless.
 ### loading instruction operators
 - LDA
 - LDX
@@ -63,18 +64,18 @@
 - DIV
 
 ### assigning value operators
-- ENTA
-- ENTX
-- ENTJ
-- ENTi
+- ENTA (spare, extra, useless)
+- ENTX (spare, extra, useless)
+- ENTJ (spare, extra, useless)
+- ENTi (spare, extra, useless)
 - INCA
 - INCX
 - INCJ
 - INCi
-- DECA
-- DECX
-- DECJ
-- DECi
+- DECA (spare, extra, useless)
+- DECX (spare, extra, useless)
+- DECJ (spare, extra, useless)
+- DECi (spare, extra, useless)
 
 ### comparison operators
 - CMPA
@@ -85,20 +86,25 @@
 - JMP
 - JSJ
 - JOV
+- JNOV
 - JL
 - JE
 - JG
-- JAN
-- JAZ
-- JAP
-- JXN
-- JXZ
-- JXP
-- JiN
-- JiZ
-- JiP
+- JAN (spare, extra, useless)
+- JAZ (spare, extra, useless)
+- JAP (spare, extra, useless)
+- JXN (spare, extra, useless)
+- JXZ (spare, extra, useless)
+- JXP (spare, extra, useless)
+- JiN (spare, extra, useless)
+- JiZ (spare, extra, useless)
+- JiP (spare, extra, useless)
 
 ### miscellaneous operators
+- SLA, SRA
+- SLAX, SRAX
+- SLC, SRC
+- MOVE 
 - NOP
 - HLT
 
