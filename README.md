@@ -111,6 +111,9 @@
 ### input-output operators
 - IN
 - OUT
+- IOC
+- JRED
+- JBUS
 
 ### conversion operators
 - NUM
