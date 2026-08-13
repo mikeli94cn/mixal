@@ -1,5 +1,5 @@
 # MIXAL programming
-## MIX structure
+## MIX computer structure
 ### registers
 - rA
 - rX
@@ -23,25 +23,28 @@
 ### memory
 - 4000 CELLS (number : 0 ~ 3999)
 
-## loading instruction operators
+## MIX computer character set
+
+## MIX computer instruction set
+### loading instruction operators
 - LDA
 - LDX
 - LDi
 
-## storing instruction operators
+### storing instruction operators
 - STA
 - STX
 - STi
 - STJ
 - STZ
 
-## arithmetic operators
+### arithmetic operators
 - ADD
 - SUB
 - MUL
 - DIV
 
-## assigning value operators
+### assigning value operators
 - ENTA
 - ENTX
 - ENTJ
@@ -55,12 +58,12 @@
 - DECJ
 - DECi
 
-## comparison operators
+### comparison operators
 - CMPA
 - CMPX
 - CMPi
 
-## jump operators
+### jump operators
 - JMP
 - JSJ
 - JOV
@@ -77,20 +80,21 @@
 - JiZ
 - JiP
 
-## miscellaneous operators
+### miscellaneous operators
 - NOP
 - HLT
 
-## input-output operators
+### input-output operators
 - IN
 - OUT
 
-## MIXAL pseudo-operation
+### conversion operators
+- NUM
+- CHAR
+
+## MIXAL
+### MIXAL pseudo-operation
 - EQU
 - ORIG
 - END
 - *+3 (self plus three)
-
-## conversion operators
-- NUM
-- CHAR
