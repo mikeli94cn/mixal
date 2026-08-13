@@ -24,8 +24,6 @@
 - 4000 CELLS (number : 0 ~ 3999)
 
 ## MIX computer character set
-
-## MIX computer instruction set
 |line\column|1|2|3|4|5|6|7|8|
 |---|---|---|---|---|---|---|---|---|
 |1|0 SAPCE|1 A|2 B|3 C|4 D|5 E|6 F|7 G|
@@ -36,6 +34,7 @@
 |6|40 .|41 ,|42 (|43 )|44 +|45 -|46 *|47 /|
 |7|48 =|49 $|50 <|51 >|52 |53 ;|54 : |55 '|
 |8|56 |57 |58 |59 |60 |61 |62 |63 |
+## MIX computer instruction set
 ### loading instruction operators
 - LDA
 - LDX
