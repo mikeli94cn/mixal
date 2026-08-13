@@ -126,3 +126,10 @@
 - END
 - CON
 - *+3 (self plus three)
+### basic programming topic
+- basic instruction operator
+- judge statement and loop
+- array
+- pointer
+- function
+
