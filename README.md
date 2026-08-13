@@ -115,4 +115,5 @@
 - EQU
 - ORIG
 - END
+- CON
 - *+3 (self plus three)
