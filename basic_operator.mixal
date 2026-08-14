@@ -1,0 +1,31 @@
+* data area
+   ORIG 1000
+ARR CON 7
+    CON 16
+    CON 5
+    CON 12
+SIZE CON 4
+ZERO CON 0
+TEMP CON 0
+SUM  CON 0
+
+* program area
+   ORIG 3000
+S  LDA ARR      rA=arr[0], rA is 7
+   STA TEMP     temp=rA, temp is 7
+   LD1 ZERO     rI1=0
+   INC1 1       rI1++
+   LDA ARR,1    rA=arr[rI1]=arr[1], rA is 16
+   LD2 ZERO     rI2=0
+   INC2 3       rI2+=3
+   LDX ARR,2    rX=arr[rI2]=arr[3], rX is 12
+* sum array
+     LDA ZERO
+     LD1 ZERO
+LOOP ADD ARR,1
+     INC1 1
+     CMP1 SIZE
+     JL LOOP
+     STA SUM
+     HLT
+     END S        end program
