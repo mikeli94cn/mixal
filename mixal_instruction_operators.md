@@ -3,7 +3,8 @@ The LDA instruction stands for Load Accumulator. It is one of the most important
 Here is the complete guide on how it works and how to use it.
 ## The Anatomy of LDA
 The full syntax for the LDA instruction looks like this:
-LDA ADDRESS,I(F)
+
+`LDA ADDRESS,I(F)`
 
 * ADDRESS: The memory location you want to read.
 * ,I (Optional Index Register): The register (1 to 6) used to shift the address.
@@ -13,23 +14,23 @@ LDA ADDRESS,I(F)
 ## Common Ways to Use LDA
 ## 1. Full Word Load (The Default)
 Loads the entire memory word (Sign + 5 bytes) into rA. [2] 
-
+``` mixal
 LDA   ARRAY        Loads the whole word at ARRAY into rA
-
+```
 ## 2. Indexed Load (For Arrays)
 Adds the value of an index register to the base address before loading.
-
+``` mixal
 LDA   ARRAY,1      If rI1 is 3, this loads the word at ARRAY+3
-
+```
 ## 3. Partial Word Load (Using F-Fields)
 You can load just a few bytes of a word. The rest of the register gets filled with zeros, and the sign behaves according to special rules.
 
 * (0:0): Loads only the sign bit.
 * (1:5): Loads bytes 1 through 5 (ignores the original sign, sets rA sign to +).
 * (4:5): Loads the last two bytes. They move to the right side of rA, and the left sides become zero.
-
+``` mixal
 LDA   ARRAY(1:3)   Loads bytes 1, 2, and 3 into the right side of rA
-
+```
 ------------------------------
 ## Code Demonstration
 Here is a short, complete MIXAL program. It sets up three variables with different numbers and uses LDA in three different ways to manipulate the Accumulator.
@@ -74,7 +75,8 @@ The ADD instruction in MIXAL adds a value from memory directly to whatever is cu
 Here is the complete guide on how it works and how to use it.
 ## The Anatomy of ADD
 The full syntax for the ADD instruction looks like this:
-ADD ADDRESS,I(F)
+
+`ADD ADDRESS,I(F)`
 
 * ADDRESS: The memory location holding the number you want to add.
 * ,I (Optional Index Register): The register (1 to 6) used to shift the target address.
@@ -137,7 +139,8 @@ The STA instruction stands for Store Accumulator. It does the exact opposite of 
 Here is the complete guide on how it works and how to use it.
 ## The Anatomy of STA
 The full syntax for the STA instruction looks like this:
-STA ADDRESS,I(F)
+
+`STA ADDRESS,I(F)`
 
 * ADDRESS: The destination memory location where you want to save the data.
 * ,I (Optional Index Register): The register (1 to 6) used to shift the destination address.
@@ -196,7 +199,8 @@ The INCA instruction stands for Increment Accumulator. It is a quick and efficie
 Here is the complete guide on how it works and how to use it.
 ## The Anatomy of INCA
 The full syntax for the INCA instruction looks like this:
-INCA ADDRESS,I
+
+`INCA ADDRESS,I`
 
 * ADDRESS: In this instruction, the address field does not represent a memory location. Instead, the literal number you write here is the actual value added to rA.
 * ,I (Optional Index Register): If you include an index register, the value inside that register is added to your literal number before incrementing rA.
@@ -251,10 +255,10 @@ Now that you know how to use INCA, would you like to see:
 # CMPA
 The CMPA instruction stands for Compare Accumulator. Its job is to compare the value currently inside the Accumulator Register (rA) with a value stored in memory.
 It does not change the value in rA or memory. Instead, it changes an internal switch inside the MIX computer called the Comparison Indicator. You then use jump instructions (like JE, JG, or JL) to make decisions based on that indicator.
-------------------------------
 ## The Anatomy of CMPA
 The full syntax for the CMPA instruction looks like this:
-CMPA ADDRESS,I(F)
+
+`CMPA ADDRESS,I(F)`
 
 * ADDRESS: The memory location holding the number you want to compare against rA.
 * ,I (Optional Index Register): The register (1 to 6) used to shift the memory address.
@@ -318,7 +322,9 @@ The JMP instruction stands for Jump. It is an unconditional jump, which means it
 Here is the complete guide on how it works and how to use it.
 ## The Anatomy of JMP
 The full syntax for the JMP instruction looks like this:
-JMP ADDRESS,I [4] 
+
+`JMP ADDRESS,I`
+[4] 
 
 * ADDRESS: The label or memory location of the instruction you want to run next.
 * ,I (Optional Index Register): If you include an index register, its value is added to the address, allowing you to jump to a dynamic location.
@@ -383,10 +389,9 @@ Now that you know how to use unconditional jumps, would you like to see:
 # JL
 The JL instruction stands for Jump Less. It is a conditional jump instruction. It tells the MIX computer to branch to a different part of your program, but only if the internal Comparison Indicator is currently set to L (Less). [1, 2] 
 You almost always run a comparison instruction (like CMPA or CMP1) right before using JL.
-------------------------------
 ## The Anatomy of JL
 The full syntax for the JL instruction looks like this:
-JL ADDRESS,I
+`JL ADDRESS,I`
 
 * ADDRESS: The destination label or memory location you want to jump to if the condition is met.
 * ,I (Optional Index Register): An index register used to shift the destination address.
