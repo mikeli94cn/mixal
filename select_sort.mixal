@@ -1,0 +1,43 @@
+* set a original address, maybe can avoid mix value and address 
+* (because value is 0~10, address is also often 0~10)
+* data-constant area
+      ORIG 1000      constant start from 1000
+SIZE  CON 7
+ZERO  CON 0
+ONE   CON 1
+* data-variable area
+      ORIG 2000      variable start from 2000
+ARR   CON 7
+      CON 2
+      CON 4
+      CON 6
+      CON 8
+      CON 1
+      CON 5
+      CON 3
+MIN   CON 0
+TEMP  CON 0
+* program area
+      ORIG 3000      program start from 3000
+START LD1 ZERO
+OUTLP ST1 TEMP
+      LD2 TEMP
+      LDA ARR,2
+      ST2 MIN
+INNLP INC2 1
+      CMPA ARR,2
+      JG CHMIN
+CONTU CMP2 SIZE
+      JL INNLP
+OUTHD LDX ARR,1
+      LD3 MIN
+      STA ARR,1
+      STX ARR,3
+      INC1 1
+      CMP1 SIZE
+      JL OUTLP
+      HLT
+CHMIN LDA ARR,2
+      ST2 MIN
+      JMP CONTU
+END   END START
