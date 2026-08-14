@@ -1,0 +1,20 @@
+* data-constant area
+      ORIG 1000
+ARR   CON 7
+      CON 2
+      CON 4
+      CON 6
+      CON 8
+      CON 1
+      CON 5
+      CON 3
+MSG   ORIG *+24
+* program area
+      ORIG 3000
+START LDA ARR
+      CHAR 0
+      STA MSG  
+      STX MSG+1  
+      OUT MSG(19)
+      HLT
+END   END START
