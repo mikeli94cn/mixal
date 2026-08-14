@@ -32,7 +32,7 @@ LDA   ARRAY(1:3)   Loads bytes 1, 2, and 3 into the right side of rA
 ------------------------------
 ## Code Demonstration
 Here is a short, complete MIXAL program. It sets up three variables with different numbers and uses LDA in three different ways to manipulate the Accumulator.
-
+``` mixal
 * --- Define Data Block ---
          ORIG  3000         Start data at memory address 3000
 X        CON   -12345       A full negative number word
@@ -57,7 +57,7 @@ Z        CON   0            A word initialized to zero
 
          HLT                Stop the machine
          END                End of the program text
-
+```
 Would you like to see:
 
 * How to use STA (Store Accumulator) to save data back into your array?
@@ -90,7 +90,7 @@ ADD ADDRESS,I(F)
 ------------------------------
 ## Code Demonstration
 Here is a short, complete MIXAL program. It sets up numbers in memory and uses ADD in three different ways: a basic addition, a negative addition (which works like subtraction), and an indexed addition. [3] 
-
+``` mixal
 * --- Define Data Block ---
          ORIG  2000         Start data at memory address 2000
 NUM1     CON   150          A positive number
@@ -118,7 +118,7 @@ NUM3     CON   300          Another positive number
 
          HLT                Stop the machine
          END                End of the program text
-
+```
 ------------------------------
 Would you like to see:
 
@@ -152,7 +152,7 @@ When you use a partial field like (1:3) with STA, it behaves differently than LD
 ------------------------------
 ## Code Demonstration
 Here is a complete MIXAL program. It demonstrates a basic store, an indexed store into an array, and a partial field store that modifies only a piece of a memory word.
-
+``` mixal
 * --- Define Data Block ---
          ORIG  1000         Start data at memory address 1000
 SAVESPOT CON   0            An empty word to save data into
@@ -182,7 +182,7 @@ TARGET   CON   11111        A word filled with ones (to demo partial store)
 
          HLT                Stop the machine
          END                End of the program text
-
+```
 ------------------------------
 Now that you know how to load, add, and store data, we can build a small complete program. Would you like to see:
 
@@ -212,7 +212,7 @@ INCA ADDRESS,I
 ------------------------------
 ## Code Demonstration
 Here is a complete MIXAL program. It demonstrates how to use INCA to add a fixed amount, how to use it with a negative number to decrease rA, and how to combine it with an index register.
-
+``` mixal
 * --- Define Data Block ---
          ORIG  2000
 SAVESPOT CON   0            A place to save our final result
@@ -239,7 +239,7 @@ SAVESPOT CON   0            A place to save our final result
          STA   SAVESPOT     Save 42 into memory
          HLT                Stop the machine
          END                End of the program text
-
+```
 ------------------------------
 Now that you know how to use INCA, would you like to see:
 
@@ -269,7 +269,7 @@ After running CMPA, the Comparison Indicator is set to one of three states:
 ------------------------------
 ## Code Demonstration
 Here is a complete MIXAL program. It sets up a target limit number in memory, loads a value into rA, compares them using CMPA, and jumps to different sections of code depending on the result.
-
+``` mixal
 * --- Define Data Block ---
          ORIG  2000         Start data at memory address 2000
 LIMIT    CON   50           Our comparison target threshold
@@ -304,7 +304,7 @@ IS_GREATER ENTA 3           If greater, set rA to 3
 FINISH   STA   RESULT       Save status code (3) into memory
          HLT                Stop the machine
          END                End of the program text
-
+```
 ------------------------------
 Now that you know how to compare values, would you like to see:
 
@@ -332,7 +332,7 @@ When you execute a JMP instruction, the MIX computer automatically updates Index
 ------------------------------
 ## Code Demonstration
 Here is a complete MIXAL program. It demonstrates how to use JMP to skip over a section of code entirely, and how to use it to jump back to a loop. [8, 9] 
-
+``` mixal
 * --- Define Data Block ---
          ORIG  2000
 COUNTER  CON   0            A memory slot to track our loop
@@ -360,7 +360,7 @@ LOOP     DEC1  1            Decrease rI1 by 1
 
 FINISH   HLT                Stop the machine
          END                End of the program text
-
+```
 ------------------------------
 Now that you know how to use unconditional jumps, would you like to see:
 
@@ -401,7 +401,7 @@ JL ADDRESS,I
 ------------------------------
 ## Code Demonstration
 Here is a complete MIXAL program. It loads a temperature value into the accumulator, compares it to a freezing point threshold, and uses JL to decide whether to activate a freezing-weather alert flag.
-
+``` mixal
 * --- Define Data Block ---
          ORIG  2000         Start data at memory address 2000
 FREEZING CON   32           The freezing point threshold
@@ -434,7 +434,7 @@ COLD_PATH ENTA 1            Set status to 1 (Alert!)
 * --- Wrap Up ---
 FINISH   HLT                Stop the machine
          END                End of the program text
-
+```
 ------------------------------
 Now that you know how JL reacts to comparisons, would you like to see:
 
