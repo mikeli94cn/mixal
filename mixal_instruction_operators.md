@@ -12,17 +12,17 @@ The full syntax for the LDA instruction looks like this:
 
 ------------------------------
 ## Common Ways to Use LDA
-## 1. Full Word Load (The Default)
+### 1. Full Word Load (The Default)
 Loads the entire memory word (Sign + 5 bytes) into rA. [2] 
 ``` mixal
 LDA   ARRAY        Loads the whole word at ARRAY into rA
 ```
-## 2. Indexed Load (For Arrays)
+### 2. Indexed Load (For Arrays)
 Adds the value of an index register to the base address before loading.
 ``` mixal
 LDA   ARRAY,1      If rI1 is 3, this loads the word at ARRAY+3
 ```
-## 3. Partial Word Load (Using F-Fields)
+### 3. Partial Word Load (Using F-Fields)
 You can load just a few bytes of a word. The rest of the register gets filled with zeros, and the sign behaves according to special rules.
 
 * (0:0): Loads only the sign bit.
