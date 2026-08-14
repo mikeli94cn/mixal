@@ -1,0 +1,17 @@
+     ORIG 3000
+S    NOP
+     LD1 ZERO
+     LDA ZERO
+LOOP INC1 1
+     ST1 VARI
+     ADD VARI
+     CMP1 HUND
+     JL LOOP
+     STA RES
+     HLT
+
+ZERO CON 0
+VARI CON 0
+HUND CON 100
+RES  CON 0
+     END S
