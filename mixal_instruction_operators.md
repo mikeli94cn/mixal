@@ -10,7 +10,8 @@ LDA ADDRESS,I(F)
 * (F) (Optional Field Specification): Tells MIX which specific bytes of the memory word to load. If you leave this out, it defaults to (0:5), which means the whole word (the sign and all 5 bytes).
 
 ------------------------------
-## Common Ways to Use LDA## 1. Full Word Load (The Default)
+## Common Ways to Use LDA
+## 1. Full Word Load (The Default)
 Loads the entire memory word (Sign + 5 bytes) into rA. [2] 
 
 LDA   ARRAY        Loads the whole word at ARRAY into rA
