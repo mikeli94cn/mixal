@@ -451,3 +451,161 @@ Now that you know how JL reacts to comparisons, would you like to see:
 [1] [https://www.plantation-productions.com](https://www.plantation-productions.com/Webster/www.artofasm.com/Linux/HTML/LowLevelControlStructsa2.html)
 [2] [https://www.dailymotion.com](https://www.dailymotion.com/video/x9xiy58)
 [3] [https://faculty.kfupm.edu.sa](https://faculty.kfupm.edu.sa/COE/shazli/coe205/Help/asm_tutorial_07.html)
+
+
+# NUM
+The NUM instruction stands for Convert to Numeric. It is used when you have a series of text characters (like data read from a keyboard, card reader, or text file) representing digits, and you want to convert them into a single, raw binary integer that the MIX computer can use for math (like ADD or SUB).
+It works across two registers at the same time: the Accumulator Register (rA) and the Extension Register (rX). [1] 
+------------------------------
+## How the NUM Instruction Works
+The full syntax for the instruction is very simple:
+NUM ADDRESS,I
+
+* The Address Field is Usually 0: The ADDRESS and ,I index fields do not point to memory. Instead, they are added to the instruction as a modifier, but in 99% of cases, you just write NUM 0.
+* The Process:
+1. MIX looks at the 5 bytes in rA and the 5 bytes in rX as a continuous 10-byte block of text characters.
+   2. It takes the last digit (the remainder of a division by 10) of each character code. For example, the character code for the text character '5' is 35. The last digit is 5.
+   3. It multiplies and chains these digits together to form one large binary number.
+   4. The final numerical result is stored completely inside rA.
+   5. rX is left filled with character codes (its contents are overwritten but usually ignored after the operation).
+   6. The signs of rA and rX are not changed by this instruction. [2] 
+
+------------------------------
+## Code Demonstration
+Here is a complete MIXAL program. It simulates loading the text characters for the number "123456" into memory, packages them into rA and rX, and uses NUM to turn them into an actual math-ready number.
+
+* --- Define Data Block ---
+         ORIG  2000
+* We want to convert the text characters "123456" into a number.
+* Each word holds 5 characters. 
+* Word 1 will hold the first 5 characters: "12345"
+* Word 2 will hold the 6th character:     "6    " (padded with spaces)
+TEXT1    ALF   12345        Text characters: '1','2','3','4','5'
+TEXT2    ALF   6            Text characters: '6',' ',' ',' ',' '
+
+RESULT   CON   0            A slot to save our final numerical integer
+
+* --- Begin Execution ---
+         ORIG  0            Start program at memory address 0
+
+* Step 1: Load the 10 characters across rA and rX
+         LDA   TEXT1        Load '12345' into rA
+         LDX   TEXT2        Load '6    ' into rX
+
+* Step 2: Convert character codes to a raw binary number
+         NUM   0            Process the 10 character bytes in rA and rX
+*                           rA now holds the actual number: 123456
+
+* Step 3: Prove it is a number by doing math on it
+         INCA  4            Add 4 to rA (123456 + 4 = 123460)
+
+* Step 4: Save the result
+         STA   RESULT       The memory at RESULT now holds 123460
+
+         HLT                Stop the machine
+         END                End of the program text
+
+------------------------------
+## Important Things to Keep in Mind
+
+   1. The 10-Byte Rule: NUM always processes exactly 10 bytes (5 from rA, 5 from rX). If your text number is shorter than 10 digits, the empty spaces (character code 0) will naturally evaluate to 0 during the math conversion, which keeps your value correct as long as your numbers are right-aligned. [3] 
+   2. The Opposite Instruction: If you want to go backward (convert a raw math number into text characters so you can print it), you use the CHAR instruction.
+
+If you are building an input/output pipeline, let me know:
+
+* Would you like to see how CHAR works to convert a number back into text?
+* Do you want to see how to read text directly from an input device before running NUM?
+
+
+[1] [https://en.wikipedia.org](https://en.wikipedia.org/wiki/MIX_%28abstract_machine%29)
+[2] [https://esolangs.org](https://esolangs.org/wiki/MIX_%28Knuth%29)
+[3] [https://esolangs.org](https://esolangs.org/wiki/MIX_%28Knuth%29)
+
+
+# CHAR
+The CHAR instruction stands for Convert to Characters. It does the exact opposite of the NUM instruction. [1, 2] 
+It takes a raw binary integer currently sitting inside the Accumulator Register (rA) and explodes it into a string of text character codes. The resulting characters are spread across both rA and the Extension Register (rX), making them instantly ready to be printed to the console or saved as a text file. [3] 
+------------------------------
+## How the CHAR Instruction Works
+The syntax for the instruction is simple:
+CHAR ADDRESS,I [4, 5, 6] 
+
+* The Address Field is Usually 0: Like NUM, the ADDRESS and ,I fields do not point to a memory location. They act as modifiers, but you almost always just write CHAR 0. [7, 8] 
+* The Process:
+1. MIX takes the raw integer inside rA.
+   2. It splits the number into 10 separate digits.
+   3. It converts each individual digit into its corresponding MIX character code (for example, the number 5 becomes the character code 35).
+   4. It packages the first 5 characters into rA and the remaining 5 characters into rX.
+   5. The original signs of rA and rX are not changed. [9, 10, 11] 
+
+------------------------------
+## Code Demonstration
+Here is a complete MIXAL program. It loads a raw number (123456) into rA, uses CHAR to turn it into printable text, and splits those characters into a printer buffer to display them. [12] 
+
+* --- Define Devices ---
+PRINTER  EQU   18           Device 18 is the line printer (console)
+
+* --- Define Data Block ---
+         ORIG  2000
+NUMBER   CON   123456       A raw integer we want to turn into text
+
+* --- Define Output Buffer Block ---
+* The printer needs a 24-word block. We will store our converted 
+* characters in the first two words and pad the rest with spaces.
+BUFFER   CON   0            Will hold the first 5 characters (from rA)
+         CON   0            Will hold the last 5 characters (from rX)
+         ORIG  *+22         Remaining 22 words filled with empty spaces
+
+* --- Begin Execution ---
+         ORIG  0            Start program at memory address 0
+
+* Step 1: Load the raw number into rA and clear rX
+         LDA   NUMBER       rA now holds the integer 123456
+         ENTX  0            Clear rX just to be safe
+
+* Step 2: Convert the integer to text character codes
+         CHAR  0            Converts the number in rA
+*                           rA now holds character codes for: "00001"
+*                           rX now holds character codes for: "23456"
+
+* Step 3: Store the character codes into our print buffer
+         STA   BUFFER       Put the left half ("00001") into word 1
+         STX   BUFFER+1     Put the right half ("23456") into word 2
+
+* Step 4: Send the buffer to the console printer
+         OUT   BUFFER(PRINTER)
+         JBUS  *(PRINTER)   Wait for the printer to finish
+
+         HLT                Stop the MIX machine
+         END                End of the program text
+
+------------------------------
+## Critical Tips for Using CHAR
+
+   1. The 10-Character Output: CHAR always creates exactly 10 characters across the two registers. If your number is small (like 56), the left side will be padded with text zeros. Your registers will look like this:
+   * rA: "00000"
+      * rX: "00056" [13] 
+   2. Handling Leading Zeros: If you print the buffer directly after running CHAR, a number like 123 will print out looking like 0000000123. If you don't want those leading zeros, you would need to write a small loop using partial F-fields to replace the character code for 0 (which is 30) with the character code for a blank space (which is 0). [14, 15] 
+
+Now that you know how both NUM and CHAR handle text data, let me know:
+
+* Would you like to see how to write a routine to strip out leading zeros before printing?
+* Do you want to see how to handle negative numbers since CHAR does not automatically print a minus sign?
+
+
+[1] [https://fr.mathworks.com](https://fr.mathworks.com/help/matlab/matlab_prog/unicode-and-ascii-values.html)
+[2] [https://spreadsheetweb.com](https://spreadsheetweb.com/excel-code-function/)
+[3] [https://baptiste-wicht.com](https://baptiste-wicht.com/posts/2011/11/print-strings-integers-intel-assembly.html)
+[4] [https://www.naukri.com](https://www.naukri.com/code360/library/character-array-in-c)
+[5] [https://www.naukri.com](https://www.naukri.com/code360/library/python-ord)
+[6] [https://help.tableau.com](https://help.tableau.com/current/pro/desktop/en-us/functions_functions_string.htm)
+[7] [https://www.husseinsspace.com](http://www.husseinsspace.com/teaching/udw/1996/asmnotes/chaptwo.htm)
+[8] [https://electronics.stackexchange.com](https://electronics.stackexchange.com/questions/366743/how-does-the-microcontroller-distinguish-char-signed-unsigned-int-broken-and-w)
+[9] [https://www.excelmojo.com](https://www.excelmojo.com/char-function-in-excel/)
+[10] [https://docs.castle.xyz](https://docs.castle.xyz/docs/scripts/string-library-reference)
+[11] [https://adacomputerscience.org](https://adacomputerscience.org/concepts/text_ascii_unicode)
+[12] [https://learn.microsoft.com](https://learn.microsoft.com/en-us/sql/t-sql/functions/char-transact-sql?view=sql-server-ver17)
+[13] [https://www.c-sharpcorner.com](https://www.c-sharpcorner.com/UploadFile/a5f59f/using-formatted-io-input-output-functions-with-example-in/)
+[14] [https://study.com](https://study.com/learn/lesson/ascii-table-values.html)
+[15] [https://e2e.ti.com](https://e2e.ti.com/support/microcontrollers/arm-based-microcontrollers-group/arm-based-microcontrollers/f/arm-based-microcontrollers-forum/493819/how-will-be-the-integers-sent-though-uart)
+
