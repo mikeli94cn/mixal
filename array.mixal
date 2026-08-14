@@ -1,0 +1,18 @@
+      ORIG 3000
+S     LD1 ZERO 
+      LDA ARR,1
+      INC1 1
+      LDA ARR,1
+      INC1 1
+      LDA ARR,1
+      STA RES
+      HLT
+
+ZERO  CON 0
+ARR   CON 4
+      CON 1
+      CON 3
+      CON 2
+RES   CON 0
+
+      END S
