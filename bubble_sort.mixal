@@ -1,0 +1,38 @@
+* constant data area
+LMT CON 7
+* varible data area
+ARR   CON 7
+      CON 2
+      CON 4
+      CON 6
+      CON 8
+      CON 1
+      CON 5
+      CON 3
+TEMP  CON 0
+* program area
+START LD1 ZERO
+OUTLP ST1 TEMP
+      LD2 TEMP
+      INC2 1
+      LDA ARR,1
+INNLP LDX ARR,2
+      STX TEMP
+      CMPA TEMP
+      JG SWAP
+CONTU INC2 1
+      CMP2 LMT
+      JL INNLP
+      INC1 1
+      CMP1 LMT
+      JL OUTLP
+      HLT
+OUTLP 
+
+INNLP 
+
+SWAP
+      JMP CONTU
+
+
+ENDPG END START
